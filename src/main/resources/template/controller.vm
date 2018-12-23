@@ -1,0 +1,52 @@
+/*
+ * ${copyright}
+ */
+package ${packageName};
+
+#foreach($i in $imports)
+$i
+#end
+
+/**
+ * @author ${author}
+ * @since ${since}
+ */
+@RestController
+public class ${domainName}Controller {
+
+    @Autowired
+    ${domainName}Service ${domainPropertyName}Service;
+
+    @GetMapping("/${domainPropertyName}s")
+    public List<${domainName}VO> list(Integer page, Integer pageSize) {
+        if (page == null && pageSize == null) {
+            return Lists.newArrayList(${domainPropertyName}Service.findAll());
+        } else {
+            return ${domainPropertyName}Service.findAll(PageRequest.of(page, pageSize)).getContent();
+        }
+    }
+
+    @GetMapping("/${domainPropertyName}s/{id}")
+    public ${domainName}VO list(@PathVariable(value = "id") Long id) {
+        return ${domainPropertyName}Service.findById(id).get();
+    }
+
+    @PostMapping("/${domainPropertyName}s")
+    public ${domainName}VO add(${domainName}VO ${domainPropertyName}VO) {
+        return ${domainPropertyName}Service.save(${domainPropertyName});
+    }
+
+    @PatchMapping("/${restProperty}s")
+    public ${voName} update(${voName} ${voProperty}) {
+        return ${serviceProperty}.save(${modelProperty});
+    }
+
+    @DeleteMapping("/${restProperty}s")
+    public void delete(String... ids) {
+        Iterable<${modelName}> ${modelProperty}s = ${serviceProperty}.findAllById(Arrays.stream(ids)
+            .map(id -> Long.parseLong(id))
+            .collect(Collectors.toList()));
+        ${serviceProperty}.deleteAll(${modelProperty}s);
+    }
+
+}

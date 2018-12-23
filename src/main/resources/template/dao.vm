@@ -1,0 +1,16 @@
+/*
+ * ${copyright}
+ */
+package ${daoPackage};
+
+import ${entityPackage}.entity.${entityName};
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+/**
+ * @author ${author}
+ * @since ${since}
+ */
+public interface ${daoName} extends CrudRepository<${entityName}, ${primaryKeyType}>, PagingAndSortingRepository<${entityName}, ${primaryKeyType}> {
+
+}

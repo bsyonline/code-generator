@@ -1,0 +1,15 @@
+/*
+ * Copyright (C) 2018 bsyonline
+ */
+package com.rolex.test.*;
+
+
+/**
+ * @author rolex
+ * @since 2018
+ */
+@Data
+public class ${className} {
+    private String ${arg1};
+    private Date ${arg2};
+}

@@ -1,0 +1,37 @@
+#set($end = $daoName.length())
+#set($start = $daoName.substring(0, 1).toLowerCase())
+#set($str = $daoName.substring(1, $end))
+#set($daoProperty = $start + $str)
+#set($end = $modelName.length())
+#set($start = $modelName.substring(0, 1).toLowerCase())
+#set($str = $modelName.substring(1, $end))
+#set($modelProperty = $start + $str)
+#set($end = $entityName.length())
+#set($start = $entityName.substring(0, 1).toLowerCase())
+#set($str = $entityName.substring(1, $end))
+#set($entityProperty = $start + $str)
+/*
+ * ${copyright}
+ */
+package ${servicePackage};
+
+import ${modelPackage}.${modelName};
+import ${entityPackage}.${entityName};
+import ${daoPackage}.${daoName};
+
+/**
+ * @author ${author}
+ * @since ${since}
+ */
+@Service
+public class ${serviceName} {
+
+    @Autowired
+    ${daoName} ${daoProperty};
+
+    public void saveAll(Set<${modelName}> ${entityProperty}s) {
+        ${daoProperty}s.forEach(${entityProperty} -> ${daoProperty}.save(${entityProperty}));
+    }
+
+
+}
