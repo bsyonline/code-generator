@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @author rolex
  * @since 2018
  */
-@RestController
+//@RestController
 public class UserController extends BaseController{
 
     @Autowired

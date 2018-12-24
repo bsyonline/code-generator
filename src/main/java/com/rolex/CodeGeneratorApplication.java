@@ -3,6 +3,7 @@
  */
 package com.rolex;
 
+import com.rolex.codegen.CodeGenerator1;
 import com.rolex.codegen.DBUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,9 +24,13 @@ public class CodeGeneratorApplication implements CommandLineRunner {
     @Autowired
     DBUtil dbUtil;
 
+    @Autowired
+    CodeGenerator1 codeGenerator1;
+    
     @Override
     public void run(String... args) throws Exception {
-        dbUtil.showTables();
-        dbUtil.showColumns("book");
+//        dbUtil.showTables();
+//        dbUtil.showColumns("book");
+        codeGenerator1.test();
     }
 }

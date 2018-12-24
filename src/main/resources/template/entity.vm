@@ -10,6 +10,12 @@ package com.rolex.test.*;
  */
 @Data
 public class ${className} {
-    private String ${arg1};
-    private Date ${arg2};
+
+#foreach($property in $propertyList)
+ ${property.isPrimaryKey}
+    #if (${property.isPrimaryKey})
+    @Id
+    #end
+    private ${property.type} ${property.name};
+#end
 }

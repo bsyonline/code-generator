@@ -2,7 +2,9 @@ spring:
   application:
     name: code-generator
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/test2
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 8009

@@ -27,11 +27,10 @@ public class DBUtil {
         return list;
     }
 
-    public Map<String, String> showColumns(String tableName) {
-        List<Map<String, Object>> list = jdbcTemplate.queryForList("select column_name,data_type from information_schema.COLUMNS where table_name = ?", new Object[]{tableName});
-        Map<String, String> map = list.stream().collect(Collectors.toMap(kv -> (String) kv.get("column_name"), kv -> (String) kv.get("data_type")));
-        System.out.println(map);
-        return map;
+    public List<Property> showColumns(String tableName) {
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select column_name,data_type,column_key from information_schema.COLUMNS where table_name = ?", new Object[]{tableName});
+        List<Property> propertyList = list.stream().map(kv->new Property((String) kv.get("column_name"),(String) kv.get("data_type"),"PRI".equals((String) kv.get("column_key"))?true:false)).collect(Collectors.toList());
+        return propertyList;
     }
 
 }
