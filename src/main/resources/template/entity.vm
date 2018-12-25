@@ -9,13 +9,13 @@ package com.rolex.test.*;
  * @since 2018
  */
 @Data
-public class ${className} {
+public class ${entityName} {
 
 #foreach($property in $propertyList)
- ${property.isPrimaryKey}
-    #if (${property.isPrimaryKey})
+#if (${property.primaryKey})
     @Id
-    #end
+#end
     private ${property.type} ${property.name};
 #end
+
 }

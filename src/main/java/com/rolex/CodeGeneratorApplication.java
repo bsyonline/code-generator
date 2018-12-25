@@ -32,5 +32,6 @@ public class CodeGeneratorApplication implements CommandLineRunner {
 //        dbUtil.showTables();
 //        dbUtil.showColumns("book");
         codeGenerator1.test();
+        System.exit(0);
     }
 }

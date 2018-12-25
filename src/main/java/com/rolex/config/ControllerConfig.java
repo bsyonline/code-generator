@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2018
  */
 @Data
-public class ControllerConfig extends CommonConfig {
+public class ControllerConfig extends GlobalConfig {
 
     private String controllerPathTemplate;
     private String packageName;//包名称

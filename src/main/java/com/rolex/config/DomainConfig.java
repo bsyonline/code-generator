@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2018
  */
 @Data
-public class DomainConfig extends CommonConfig {
+public class DomainConfig extends GlobalConfig {
 
     private String controllerPathTemplate;
     private String packageName;//包名称
