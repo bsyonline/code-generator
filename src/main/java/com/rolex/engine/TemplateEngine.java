@@ -1,15 +1,14 @@
-package com.rolex.writer;
+package com.rolex.engine;
 
 import com.rolex.config.Config;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
  * @author rolex
  * @since 2018
  */
-public interface TemplateWriter {
+public interface TemplateEngine {
 
     void writer(Config config) throws IOException;
 }

@@ -13,13 +13,13 @@ import lombok.Data;
 public class TemplateConfig {
 
     private Type type = Type.VELOCITY;
-    private String controller = "template/controller.java.vm";
-    private String service = "template/service.java.vm";
-    private String serviceImpl = "template/serviceImpl.java.vm";
-    private String entity = "template/entity.java.vm";
-    private String dao = "template/dao.java.vm";
-    private String model = "template/model.java.vm";
-    private String vo = "template/vo.java.vm";
+    private boolean controller = false;
+    private boolean service = false;
+    private boolean serviceImpl = false;
+    private boolean entity = false;
+    private boolean dao = false;
+    private boolean model = false;
+    private boolean vo = false;
 
     enum Type{
 

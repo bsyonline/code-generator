@@ -3,20 +3,14 @@
  */
 package com.rolex.codegen;
 
+import com.google.common.collect.Lists;
 import com.rolex.config.*;
-import com.rolex.writer.TemplateWriter;
-import com.rolex.writer.VelocityWriter;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import com.rolex.engine.TemplateEngine;
+import com.rolex.engine.VelocityTemplateEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 /**
  * @author rolex
@@ -24,15 +18,49 @@ import java.util.Map;
  */
 @Component
 public class CodeGenerator1 {
-
+    
     Config config;
-
     @Autowired
     DBUtil dbUtil;
-
+    TemplateEngine templateEngine;
+    
     public void test() throws IOException {
-        TemplateWriter velocityWriter = new VelocityWriter();
-        velocityWriter.writer(config);
+        
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setAuthor("rolex");
+        globalConfig.setBasePackage("com.rolex");
+        globalConfig.setCopyright("2018 bsyonline");
+        globalConfig.setDomainName("User");
+        globalConfig.setSince("2018");
+        
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setDriverName("com.mysql.jdbc.Driver");
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/test2");
+        dataSourceConfig.setUsername("root");
+        dataSourceConfig.setPassword("123456");
+        dataSourceConfig.setType("mysql");
+        
+        DomainConfig domainConfig = new DomainConfig();
+        domainConfig.setImports(Lists.newArrayList());
+        domainConfig.setPackageName("dao.domain");
+        
+        TemplateConfig templateConfig = new TemplateConfig();
+        templateConfig.setEntity(true);
+        
+        OutputConfig outputConfig = new OutputConfig();
+        outputConfig.setOutputPath("src/main/resources/");
+        
+        globalConfig.domainConfig(domainConfig)
+            .dataSourceConfig(dataSourceConfig)
+            .templateConfig(templateConfig)
+            .outputConfig(outputConfig);
+        
+        globalConfig.init();
+    
+        globalConfig.getConfigMap().entrySet().forEach(kv-> System.out.println(kv.getKey() + "\t" + kv.getValue()));
+    
+        TemplateEngine engine = new VelocityTemplateEngine();
+        engine.writer(config);
     }
-
+    
 }

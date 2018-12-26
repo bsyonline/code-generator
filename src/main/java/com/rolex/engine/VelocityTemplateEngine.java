@@ -1,9 +1,10 @@
 /*
  * Copyright (C) 2018 bsyonline
  */
-package com.rolex.writer;
+package com.rolex.engine;
 
 import com.rolex.config.Config;
+import com.rolex.db.DatabaseInfo;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -18,14 +19,23 @@ import java.io.*;
  * @since 2018
  */
 @Component
-public class VelocityWriter implements TemplateWriter {
-    @Override
-    public void writer(Config config) throws IOException {
-        VelocityEngine velocityEngine = new VelocityEngine();
+public class VelocityTemplateEngine implements TemplateEngine {
+    
+    DatabaseInfo databaseInfo;
+    VelocityEngine velocityEngine;
+    
+    public VelocityTemplateEngine(){
+        velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+    
         velocityEngine.init();
-        Template template = velocityEngine.getTemplate(config.template().getEntity());
+    }
+    
+    @Override
+    public void writer(Config config) throws IOException {
+        
+        Template template = velocityEngine.getTemplate(config.template().toString());
         File file = new File(config.outputPath());
         if (!file.getParentFile().exists()) {
             boolean flag = file.getParentFile().mkdirs();

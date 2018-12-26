@@ -12,16 +12,11 @@ import java.util.List;
  * @since 2018
  */
 @Data
-public class DomainConfig {
-
-    private String entityPath;
+public class ServiceImplConfig {
+    
+    private String serviceImplPath;
     private String packageName;//包名称
     private List<String> imports;//所引入的包
     private String templatePath = "template/entity.java.vm";
 
-//    public void init() {
-//        packageName = basePackage + ".dao.domain";
-//        controllerPathTemplate = System.getProperty("user.dir") + "/" + packageName.replace(".", "/") + "/" + domainName + "Entity.java";
-//    }
-    
 }
