@@ -9,7 +9,7 @@ package com.rolex.test.*;
  * @since 2018
  */
 @Data
-public class ${entityName} {
+public class ${domainName}Entity {
 
 #foreach($property in $propertyList)
 #if (${property.primaryKey})

@@ -1,6 +1,6 @@
 package com.rolex.engine;
 
-import com.rolex.config.Config;
+import com.rolex.config.GlobalConfig;
 
 import java.io.IOException;
 
@@ -10,5 +10,5 @@ import java.io.IOException;
  */
 public interface TemplateEngine {
 
-    void writer(Config config) throws IOException;
+    void writer(GlobalConfig config) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 }

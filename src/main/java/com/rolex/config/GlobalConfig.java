@@ -34,7 +34,7 @@ public class GlobalConfig {
     DataSourceConfig dataSourceConfig;
     OutputConfig outputConfig;
     
-    VelocityEngine engine ;
+    VelocityEngine engine;
     
     Map<String, Object> configMap = Maps.newHashMap();
     
@@ -82,6 +82,8 @@ public class GlobalConfig {
         configMap.put("db.password", dataSourceConfig.getPassword());
         configMap.put("db.driverName", dataSourceConfig.getDriverName());
         configMap.put("db.generateCodeTables", generateCodeTables);
+        configMap.put("db.type", "mysql");
+        configMap.put("db.infoClass", "com.rolex.db.MySQLInfo");
         
         
     }

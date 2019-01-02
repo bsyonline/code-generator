@@ -1,8 +1,8 @@
 package com.rolex.db;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +22,11 @@ import java.util.stream.Collectors;
  * 2018/12/26   rolex           Create file
  *******************************************************************************/
 public class MySQLInfo implements DatabaseInfo {
-    @Autowired
+    
+    public void setJdbcTemplate(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+    
     JdbcTemplate jdbcTemplate;
     
     @Override
@@ -35,7 +39,10 @@ public class MySQLInfo implements DatabaseInfo {
     @Override
     public List<ColumnInfo> showColumns(String tableName) {
         List<Map<String, Object>> list = jdbcTemplate.queryForList("select column_name,data_type,column_key from information_schema.COLUMNS where table_name = ?", new Object[]{tableName});
-        List<ColumnInfo> columnInfoList = list.stream().map(kv->new ColumnInfo((String) kv.get("column_name"),(String) kv.get("data_type"),"PRI".equals((String) kv.get("column_key"))?true:false)).collect(Collectors.toList());
+        List<ColumnInfo> columnInfoList = list.stream()
+            .map(kv -> new ColumnInfo((String) kv.get("column_name"),
+                DataType.get((String) kv.get("data_type"))==null?(String) kv.get("data_type"):DataType.get((String) kv.get("data_type")),
+                "PRI".equals((String) kv.get("column_key")) ? true : false)).collect(Collectors.toList());
         return columnInfoList;
     }
 }

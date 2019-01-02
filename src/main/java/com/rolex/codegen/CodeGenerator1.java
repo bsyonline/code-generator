@@ -22,9 +22,13 @@ public class CodeGenerator1 {
     Config config;
     @Autowired
     DBUtil dbUtil;
-    TemplateEngine templateEngine;
     
-    public void test() throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        CodeGenerator1 codeGenerator1 = new CodeGenerator1();
+        codeGenerator1.test();
+    }
+    
+    public void test() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setAuthor("rolex");
@@ -56,11 +60,11 @@ public class CodeGenerator1 {
             .outputConfig(outputConfig);
         
         globalConfig.init();
-    
-        globalConfig.getConfigMap().entrySet().forEach(kv-> System.out.println(kv.getKey() + "\t" + kv.getValue()));
-    
+        
+        globalConfig.getConfigMap().entrySet().forEach(kv -> System.out.println(kv.getKey() + "\t" + kv.getValue()));
+        
         TemplateEngine engine = new VelocityTemplateEngine();
-        engine.writer(config);
+        engine.writer(globalConfig);
     }
     
 }
